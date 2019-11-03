@@ -1,0 +1,82 @@
+﻿@model AltHealth.Web.Models.ViewModels.BookingViewModel
+
+@{
+    ViewBag.Title = "Add";
+}
+<link href="~/Content/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<h2>Add</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Booking</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.BookingNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Booking.BookingNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Booking.BookingNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Booking.StartDate, new { htmlAttributes = new { @class = "startDate date" } })
+                @Html.ValidationMessageFor(model => model.Booking.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Booking.EndDate, new { htmlAttributes = new { @class = "endDate date" } })
+                @Html.ValidationMessageFor(model => model.Booking.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.PatientId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Booking.PatientId, Model.Patients, "Select a Patient", new { @class = "select2 form-control" })
+                @Html.ValidationMessageFor(model => model.Booking.PatientId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Booking.PractisionerId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Booking.PractisionerId, Model.Practitioners, "Select a Practitioner", new { @class = "select2 form-control" })
+                @Html.ValidationMessageFor(model => model.Booking.PractisionerId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Booking" class="btn btn-danger" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Booking", new { @class = "btn btn-primary" })
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+    <script src="~/Scripts/select2.js"></script>
+    <script>
+        $(document).ready(function () {
+            var dateNow = new Date();
+            $('.select2').select2();
+            $('.startDate').datetimepicker();
+            $('.endDate').datetimepicker();
+        });
+    </script>
+}

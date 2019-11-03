@@ -1,0 +1,81 @@
+﻿@model AltHealth.Web.Models.ViewModels.BookingViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+<h2>Manage Bookings</h2>
+
+<p>
+    @Html.ActionLink("Make New Booking", "Add", "Booking", new { @class = "btn btn-danger" })
+</p>
+<table class="bookingTable">
+    <thead>
+        <tr>
+            <th>
+                Booking Number
+            </th>
+            <th>
+                Start Time
+            </th>
+            <th>
+                End Time
+            </th>
+            <th>
+                Patient
+            </th>
+            <th>
+                Practitioner
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Bookings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PractitionerName)
+                </td>
+                <td>
+                    @Html.ActionLink("Manage", "Manage", "Booking", new { id = item.Id }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row">
+    @if (Model.Status == "success")
+    {
+        <div class="col-md-push-3 col-md-6 alert alert-success">
+            <p>You have successfully Added a new booking</p>
+        </div>
+    }
+    else if (Model.Status == "fail")
+    {
+        <div class="col-md-push-3 col-md-6 alert alert-danger">
+            <p>There has been a problem Added a new booking</p>
+        </div>
+    }
+</div>
+@section Scripts{
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.bookingTable').DataTable();
+        });
+    </script>
+}
