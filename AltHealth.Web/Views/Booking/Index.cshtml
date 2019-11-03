@@ -7,8 +7,10 @@
 <h2>Manage Bookings</h2>
 
 <p>
+    <!--Add the booking button-->
     @Html.ActionLink("Make New Booking", "Add", "Booking", new { @class = "btn btn-danger" })
 </p>
+<!--Create a table to view the data in-->
 <table class="bookingTable">
     <thead>
         <tr>
@@ -31,32 +33,35 @@
         </tr>
     </thead>
 
+    <!--Populate the table that was created above with data-->
     <tbody>
         @foreach (var item in Model.Bookings)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookingNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PatientName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PractitionerName)
-                </td>
-                <td>
-                    @Html.ActionLink("Manage", "Manage", "Booking", new { id = item.Id }, new { @class = "btn btn-primary" })
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PractitionerName)
+            </td>
+            <td>
+                @Html.ActionLink("Manage", "Manage", "Booking", new { id = item.Id }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
         }
     </tbody>
 </table>
+
+<!--Displays the status when the add bookig button was clicked-->
 <div class="row">
     @if (Model.Status == "success")
     {
