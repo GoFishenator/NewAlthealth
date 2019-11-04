@@ -11,7 +11,8 @@ namespace AltHealth.Web.Controllers
 {
     public class BookingController : Controller
     {
-        BookingManager _manager = new BookingManager();
+        private readonly BookingManager _manager = new BookingManager();
+        private readonly InvoiceManager _managerInvoice = new InvoiceManager();
         // GET: Booking
         public ActionResult Index(string status)
         {
@@ -58,6 +59,21 @@ namespace AltHealth.Web.Controllers
             }
 
         }
+
+        public ActionResult AddInvoice(int id)
+        {
+            try
+            {
+                _managerInvoice.CreateInvoice(id);
+                return RedirectToAction("Manage", new { id , status = "invoiceSuccess" });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Manage", new { id , status = "invoiceFail" });
+            }
+
+        }
+
         public ActionResult Manage(int id, string status)
         {
             var patients = _manager.GetAllPatients();

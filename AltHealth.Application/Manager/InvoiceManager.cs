@@ -124,6 +124,11 @@ namespace AltHealth.Application.Manager
             };
             _dbInvoiceItem.Add(invoiceItem);
             _dbInvoiceItem.Save();
+            var invoice = _dbInvoice.GetAll().First(x => x.Id == invoiceId);
+            var amountToAdd = (invoiceItem.Amount * invoiceItem.Quantity);
+            invoice.TotalAmount = invoice.TotalAmount + amountToAdd;
+            _dbInvoice.Edit(invoice);
+            _dbInvoice.Save();
         }
 
         public void UpdateInvoiceItem(InvoiceItemDto item)
@@ -136,12 +141,14 @@ namespace AltHealth.Application.Manager
             invoiceItem.Quantity = item.Quantity;
             invoiceItem.InvoiceId = item.InvoiceId;
             _dbInvoiceItem.Edit(invoiceItem);
+            _dbInvoiceItem.Save();
         }
 
         public void RemoveInvoiceItem(int id)
         {
             var invoiceItem = _dbInvoiceItem.GetAll().First(x => x.Id == id);
             _dbInvoiceItem.Delete(invoiceItem);
+            _dbInvoiceItem.Save();
         }
     }
 }

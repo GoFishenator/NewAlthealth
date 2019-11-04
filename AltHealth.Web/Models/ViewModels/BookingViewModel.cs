@@ -14,5 +14,6 @@ namespace AltHealth.Web.Models.ViewModels
         public List<SelectListItem> Patients { get; set; }
         public List<SelectListItem> Practitioners { get; set; }
         public string Status { get; set; }
+        public InvoiceDisplayDto Invoice { get; set; }
     }
 }

@@ -7,6 +7,7 @@
 <link href="~/Content/css/select2.css" rel="stylesheet" />
 <h2>Manage</h2>
 
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -66,7 +67,23 @@
 }
 
 <div>
+    @Html.ActionLink("Create Invoice", "AddInvoice", "Booking", new { id = Model.Booking.Id }, new { @class = "btn btn-primary" })
     @Html.ActionLink("Back to List", "Index", "Booking", new { @class = "btn btn-primary" })
+</div>
+
+<div class="row">
+    @if (Model.Status == "invoiceSuccess")
+    {
+        <div class="col-md-push-3 col-md-6 alert alert-success">
+            <p>You have successfully Added a new Invoice</p>
+        </div>
+    }
+    else if (Model.Status == "invoiceFail")
+    {
+        <div class="col-md-push-3 col-md-6 alert alert-danger">
+            <p>There has been a problem Added a new Invoice</p>
+        </div>
+    }
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

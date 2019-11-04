@@ -1,0 +1,96 @@
+﻿@model AltHealth.Web.Models.ViewModels.InvoiceViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+
+    @Html.ActionLink("Create New", "Create")
+</p>
+<link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+<h2>Manage Invoices</h2>
+
+<p>
+    <!--Add the booking button-->
+    @Html.ActionLink("Create new Invoice", "Add", "Booking", new { @class = "btn btn-danger" })
+</p>
+<table class="invoiceTable">
+    <thead>
+        <tr>
+            <th>
+                Invoice Number
+            </th>
+            <th>
+                Booking Number
+            </th>
+            <th>
+                InvoiceDate
+            </th>
+            <th>
+                Is Paid
+            </th>
+            <th>
+                Is Sent
+            </th>
+            <th>
+                Payed Up Date
+            </th>
+            <th>
+                Out Standing Amount
+            </th>
+
+            <th>
+                TotalAmount
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Invoices)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPaid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsSent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayedUpDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OutStandingAmount)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    @Html.ActionLink("Manage", "Edit", new { id = item.Id })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.invoiceTable').DataTable();
+        });
+    </script>
+}
