@@ -45,10 +45,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manager\BookingManager.cs" />
+    <Compile Include="Manager\InvoiceManager.cs" />
     <Compile Include="Manager\PatientManager.cs" />
     <Compile Include="MappingProfiles\MapperProfile.cs" />
     <Compile Include="Models\BookingDto.cs" />
     <Compile Include="Models\InvoiceBookingDto.cs" />
+    <Compile Include="Models\InvoiceDisplayDto.cs" />
     <Compile Include="Models\PatientDto.cs" />
     <Compile Include="Models\PatientPaymentDto.cs" />
     <Compile Include="Models\PractionerDto.cs" />
